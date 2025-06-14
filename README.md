@@ -73,10 +73,6 @@ npm run format
 
 MIT License
 
-## 作者
-
-Vibe Coding Competition Entry
-
 ---
 
 Enjoy your writing experience with Just a Paper!
