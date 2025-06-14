@@ -25,6 +25,7 @@
     "directories": {
       "output": "dist"
     },
+    "icon": "assets/icons/app",
     "files": [
       "src/**/*",
       "assets/**/*"

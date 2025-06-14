@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paper with folded corner -->
+  <rect x="160" y="160" width="704" height="704" rx="48" ry="48" fill="#ffffff"/>
+  <polygon points="864,160 864,320 704,160" fill="#e8e8e8"/>
+  <!-- JP monogram subtle -->
+  <text x="360" y="640" font-family="'Source Serif 4', serif" font-size="320" fill="#2c2c2c" opacity="0.15">JP</text>
+</svg> 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Drop shadow -->
+  <rect x="180" y="180" width="664" height="664" rx="32" ry="32" fill="#000" opacity="0.1"/>
+  <!-- Paper -->
+  <rect x="160" y="160" width="664" height="664" rx="32" ry="32" fill="#ffffff"/>
+</svg> 

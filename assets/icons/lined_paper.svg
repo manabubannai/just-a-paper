@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paper background -->
+  <rect x="160" y="160" width="704" height="704" rx="32" ry="32" fill="#ffffff"/>
+  <!-- Horizontal guidelines -->
+  <g stroke="#e0e0e0" stroke-width="16">
+    <line x1="200" y1="300" x2="840" y2="300"/>
+    <line x1="200" y1="420" x2="840" y2="420"/>
+    <line x1="200" y1="540" x2="840" y2="540"/>
+    <line x1="200" y1="660" x2="840" y2="660"/>
+  </g>
+</svg> 

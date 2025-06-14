@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Abstract pencil strokes -->
+  <path d="M220 400 Q512 350 804 420" stroke="#4a90e2" stroke-width="48" stroke-linecap="round" fill="none"/>
+  <path d="M240 560 Q512 510 784 580" stroke="#4a90e2" stroke-width="48" stroke-linecap="round" fill="none" opacity="0.6"/>
+</svg> 

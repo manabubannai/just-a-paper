@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paper with folded corner -->
+  <rect x="160" y="160" width="704" height="704" rx="32" ry="32" fill="#ffffff"/>
+  <polygon points="864,160 864,320 704,160" fill="#e8e8e8"/>
+  <!-- Pen nib -->
+  <path d="M472 320 L552 400 L480 472 L400 392 Z" fill="#4a4a4a"/>
+  <circle cx="496" cy="396" r="20" fill="#ffffff"/>
+</svg> 
