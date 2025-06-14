@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;700&display=swap');
+
+:root {
+  --bg-color: #ffffff;
+  --paper-color: #ffffff;
+  --text-color: #2c2c2c;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --drawer-bg: #fafafa;
+  --font-serif: 'Source Serif 4', 'Source Serif', 'Georgia', 'Times New Roman', 'Hiragino Mincho ProN', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Consolas', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-bar {
+  background-color: var(--bg-color);
+  /* border-bottom: 1px solid var(--border-color); */
+  padding: 0.75rem 1rem;
+  -webkit-app-region: drag;
+}
+
+.title-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 1.125rem;
+  font-weight: normal;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.menu-button {
+  -webkit-app-region: no-drag;
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 1001;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.menu-button:hover {
+  opacity: 1;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.paper-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.paper {
+  background-color: var(--paper-color);
+  border-radius: 2px;
+  padding: 4rem;
+  width: 70%;
+  min-height: 80vh;
+  transition: width 0.3s ease;
+}
+
+.editor {
+  width: 100%;
+  min-height: 100%;
+  outline: none;
+  font-size: 1.125rem;
+  line-height: inherit;
+}
+
+.editor:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+  font-style: italic;
+}
+
+.editor.serif {
+  font-family: var(--font-serif);
+}
+
+.editor.sans-serif {
+  font-family: var(--font-sans);
+}
+
+.editor.monospace {
+  font-family: var(--font-mono);
+}
+
+.settings-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
+  background-color: var(--drawer-bg);
+  box-shadow: -2px 0 10px var(--shadow-color);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-drawer.open {
+  right: 0;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.settings-header h2 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: none;
+}
+
+.close-button:hover {
+  opacity: 1;
+}
+
+.settings-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.setting-group {
+  margin-bottom: 2rem;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.setting-control {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.2s;
+}
+
+.setting-control:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  padding: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #4a90e2;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #4a90e2;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 999;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --paper-color: #2a2a2a;
+    --text-color: #e0e0e0;
+    --border-color: #3a3a3a;
+    --drawer-bg: #252525;
+  }
+}
+
+@media (max-width: 768px) {
+  .paper {
+    width: 90%;
+    padding: 2rem;
+  }
+  
+  .settings-drawer {
+    width: 100%;
+    right: -100%;
+  }
+}

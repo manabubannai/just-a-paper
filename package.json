@@ -1,0 +1,42 @@
+{
+  "name": "just-a-paper",
+  "version": "1.0.0",
+  "description": "究極にシンプルな執筆体験 - PC画面に一枚の紙だけを映す",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.{js,html,css}\"",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never"
+  },
+  "keywords": ["electron", "writing", "minimal", "editor"],
+  "author": "Vibe Coding",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.0.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.0"
+  },
+  "build": {
+    "appId": "com.vibecoding.justapaper",
+    "productName": "Just a Paper",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
