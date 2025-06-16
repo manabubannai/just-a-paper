@@ -93,7 +93,7 @@ body {
 .paper {
   background-color: var(--paper-color);
   border-radius: 2px;
-  padding: 4rem;
+  padding: 2.5rem 4rem 4rem 4rem;
   width: 70%;
   min-height: 80vh;
   transition: width 0.3s ease;
