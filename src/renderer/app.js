@@ -91,6 +91,14 @@ class JustAPaper {
       this.saveSettings();
     });
     
+    // Intercept paste events to ensure only plain text is inserted, preventing
+    // unintended inline styles (e.g., red font colour) from external sources.
+    this.editor.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, text);
+    });
+    
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.settingsDrawer.classList.contains('open')) {
         this.closeSettings();

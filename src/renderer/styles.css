@@ -125,6 +125,8 @@ body {
   font-family: var(--font-mono);
 }
 
+/* link styles removed */
+
 .settings-drawer {
   position: fixed;
   top: 0;
