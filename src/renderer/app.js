@@ -15,12 +15,21 @@ class JustAPaper {
     this.widthRange = document.getElementById('widthRange');
     this.widthValue = document.getElementById('widthValue');
     
+    this.linkDialog = document.getElementById('linkDialog');
+    this.linkUrl = document.getElementById('linkUrl');
+    this.linkOk = document.getElementById('linkOk');
+    this.linkCancel = document.getElementById('linkCancel');
+    this.linkRemove = document.getElementById('linkRemove');
+    
     this.settings = {
       font: 'serif',
       lineHeight: 1.6,
       fontSize: 16,
       width: 700
     };
+    
+    this.savedSelection = null;
+    this.currentLink = null;
     
     this.init();
   }
@@ -100,8 +109,38 @@ class JustAPaper {
     });
     
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.settingsDrawer.classList.contains('open')) {
-        this.closeSettings();
+      if (e.key === 'Escape') {
+        if (this.linkDialog.classList.contains('open')) {
+          this.closeLinkDialog();
+        } else if (this.settingsDrawer.classList.contains('open')) {
+          this.closeSettings();
+        }
+      }
+      
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        this.openLinkDialog();
+      }
+    });
+    
+    this.linkOk.addEventListener('click', () => this.handleLinkSubmit());
+    this.linkCancel.addEventListener('click', () => this.closeLinkDialog());
+    this.linkRemove.addEventListener('click', () => this.removeLink());
+    
+    this.linkUrl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        this.handleLinkSubmit();
+      }
+    });
+    
+    this.editor.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        const url = e.target.href;
+        if (url && window.electronAPI) {
+          window.electronAPI.openExternal(url);
+        }
       }
     });
   }
@@ -120,6 +159,107 @@ class JustAPaper {
       this.menuButton.style.display = '';
     }, 300);
     this.editor.focus();
+  }
+  
+  openLinkDialog() {
+    const selection = window.getSelection();
+    
+    if (selection.rangeCount === 0) return;
+    
+    const range = selection.getRangeAt(0);
+    if (range.collapsed) return;
+    
+    this.savedSelection = {
+      start: range.startOffset,
+      end: range.endOffset,
+      startContainer: range.startContainer,
+      endContainer: range.endContainer,
+      range: range.cloneRange()
+    };
+    
+    let existingLink = null;
+    let node = range.commonAncestorContainer;
+    
+    if (node.nodeType === Node.TEXT_NODE) {
+      node = node.parentNode;
+    }
+    
+    while (node && node !== this.editor) {
+      if (node.tagName === 'A') {
+        existingLink = node;
+        break;
+      }
+      node = node.parentNode;
+    }
+    
+    this.currentLink = existingLink;
+    
+    if (existingLink) {
+      this.linkUrl.value = existingLink.href;
+      this.linkRemove.style.display = 'block';
+      this.linkDialog.querySelector('h3').textContent = 'リンクを編集';
+    } else {
+      this.linkUrl.value = '';
+      this.linkRemove.style.display = 'none';
+      this.linkDialog.querySelector('h3').textContent = 'リンクを追加';
+    }
+    
+    this.linkDialog.classList.add('open');
+    this.overlay.classList.add('active');
+    this.linkUrl.focus();
+    this.linkUrl.select();
+  }
+  
+  closeLinkDialog() {
+    this.linkDialog.classList.remove('open');
+    this.overlay.classList.remove('active');
+    this.savedSelection = null;
+    this.currentLink = null;
+    this.editor.focus();
+  }
+  
+  handleLinkSubmit() {
+    const url = this.linkUrl.value.trim();
+    
+    if (!url) return;
+    
+    if (!url.match(/^https?:\/\//)) {
+      this.linkUrl.value = 'https://' + url;
+      return;
+    }
+    
+    if (this.savedSelection) {
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(this.savedSelection.range);
+      
+      if (this.currentLink) {
+        this.currentLink.href = url;
+      } else {
+        document.execCommand('createLink', false, url);
+        
+        const links = this.editor.querySelectorAll('a[href="' + url + '"]');
+        const newLink = links[links.length - 1];
+        if (newLink) {
+          newLink.target = '_blank';
+          newLink.rel = 'noopener noreferrer';
+        }
+      }
+    }
+    
+    this.closeLinkDialog();
+  }
+  
+  removeLink() {
+    if (this.currentLink) {
+      const parent = this.currentLink.parentNode;
+      while (this.currentLink.firstChild) {
+        parent.insertBefore(this.currentLink.firstChild, this.currentLink);
+      }
+      parent.removeChild(this.currentLink);
+    }
+    
+    this.closeLinkDialog();
   }
 }
 

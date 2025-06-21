@@ -125,7 +125,112 @@ body {
   font-family: var(--font-mono);
 }
 
-/* link styles removed */
+/* Link styles */
+.editor a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s;
+  cursor: pointer;
+}
+
+.editor a:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Link dialog styles */
+.link-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1002;
+  transition: all 0.2s ease;
+}
+
+.link-dialog.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.link-dialog-content {
+  background: var(--paper-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.link-dialog h3 {
+  font-size: 1.125rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.link-dialog input[type="url"] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.link-dialog input[type="url"]:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.link-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.link-dialog button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.link-dialog button:hover {
+  background-color: var(--drawer-bg);
+}
+
+.link-dialog button#linkOk {
+  background-color: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.link-dialog button#linkOk:hover {
+  background-color: #357abd;
+}
+
+.link-dialog button#linkRemove {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.link-dialog button#linkRemove:hover {
+  background-color: #dc3545;
+  color: white;
+}
 
 .settings-drawer {
   position: fixed;
@@ -258,6 +363,14 @@ input[type="range"]::-moz-range-thumb {
     --text-color: #e0e0e0;
     --border-color: #3a3a3a;
     --drawer-bg: #252525;
+  }
+  
+  .editor a {
+    text-decoration-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .editor a:hover {
+    text-decoration-color: rgba(255, 255, 255, 0.6);
   }
 }
 

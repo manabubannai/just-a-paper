@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -44,4 +44,10 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('get-platform', () => {
   return process.platform;
+});
+
+ipcMain.handle('open-external', async (event, url) => {
+  if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+    await shell.openExternal(url);
+  }
 });

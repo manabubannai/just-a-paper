@@ -105,6 +105,18 @@
 
   <div class="overlay" id="overlay"></div>
 
+  <div class="link-dialog" id="linkDialog">
+    <div class="link-dialog-content">
+      <h3>リンクを追加</h3>
+      <input type="url" id="linkUrl" placeholder="https://example.com" autocomplete="off">
+      <div class="link-dialog-actions">
+        <button id="linkCancel">キャンセル</button>
+        <button id="linkRemove" style="display:none">削除</button>
+        <button id="linkOk">OK</button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
